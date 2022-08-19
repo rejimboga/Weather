@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WeatherViewController: UIViewController, ViewControllerBinderProtocol, UITableViewDataSource, RoutingDelegate {
+class WeatherViewController: UIViewController, ViewControllerBinderProtocol, UITableViewDataSource, RoutingDelegate, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -48,6 +48,7 @@ class WeatherViewController: UIViewController, ViewControllerBinderProtocol, UIT
         let tableViewHeader = HeaderTableView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width:                                                                              self.view.frame.width, height: 334)))
         tableView.tableHeaderView = tableViewHeader
         tableViewHeader.delegate = self
+        tableViewHeader.headerViewModel.weatherList = weatherList
         DispatchQueue.main.async {
             tableViewHeader.collectionView.reloadData()
         }
@@ -55,6 +56,12 @@ class WeatherViewController: UIViewController, ViewControllerBinderProtocol, UIT
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         weatherViewModel?.resultArray?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) as? CustomTableViewCell else { return }
+        cell.configureSelectedCell()
+        tableView.reloadRows(at: [indexPath], with: .none)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

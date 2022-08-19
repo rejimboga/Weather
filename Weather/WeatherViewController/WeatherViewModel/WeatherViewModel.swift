@@ -41,20 +41,20 @@ class WeatherViewModel: WeatherViewModelProtocol {
     
     private func settingCurrentForecast(list: [List]) {
         list.forEach({
-            if !dict.keys.contains(($0.dt_txt?.toDate()!.startOfDay)!) {
-                dict[($0.dt_txt?.toDate()!.startOfDay)!] = [$0]
+            if !dict.keys.contains(($0.dtTxt?.toDate()!.startOfDay)!) {
+                dict[($0.dtTxt?.toDate()!.startOfDay)!] = [$0]
             } else {
-                dict[($0.dt_txt?.toDate()!.startOfDay)!]?.append($0)
+                dict[($0.dtTxt?.toDate()!.startOfDay)!]?.append($0)
             }
         })
-        self.weatherList.value = dict[list.first?.dt_txt?.toDate()?.startOfDay ?? Date()]
+        self.weatherList.value = dict[list.first?.dtTxt?.toDate()?.startOfDay ?? Date()]
     }
     
     private func filterForecastForNextDays() {
         var resultDict: [Date:(min: Double?, max: Double?)] = [:]
         dict.keys.forEach { date in
-            let max = dict[date]?.compactMap({ $0.main?.temp_max }).max()
-            let min = dict[date]?.compactMap({ $0.main?.temp_min }).min()
+            let max = dict[date]?.compactMap({ $0.main?.tempMax }).max()
+            let min = dict[date]?.compactMap({ $0.main?.tempMin }).min()
             resultDict[date] = (min: min, max: max)
         }
         

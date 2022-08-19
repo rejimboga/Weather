@@ -29,9 +29,17 @@ class HeaderTableView: UIView, UICollectionViewDataSource, UICollectionViewDeleg
         }
     }
     
-    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel! {
+        didSet {
+            locationLabel.textColor = UIColor(rgb: 0xFFFFFF)
+        }
+    }
     
-    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel! {
+        didSet {
+            dateLabel.textColor = UIColor(rgb: 0xFFFFFF)
+        }
+    }
     
     @IBOutlet weak var weatherState: UIImageView! {
         didSet {
@@ -45,21 +53,33 @@ class HeaderTableView: UIView, UICollectionViewDataSource, UICollectionViewDeleg
             temperatureImage.image = #imageLiteral(resourceName: "ic_temp")
         }
     }
-    @IBOutlet weak var temperatureLabel: UILabel!
+    @IBOutlet weak var temperatureLabel: UILabel! {
+        didSet {
+            temperatureLabel.textColor = UIColor(rgb: 0xFFFFFF)
+        }
+    }
     
     @IBOutlet weak var humidityImage: UIImageView! {
         didSet {
             humidityImage.image = #imageLiteral(resourceName: "ic_humidity")
         }
     }
-    @IBOutlet weak var humidityLabel: UILabel!
+    @IBOutlet weak var humidityLabel: UILabel! {
+        didSet {
+            humidityLabel.textColor = UIColor(rgb: 0xFFFFFF)
+        }
+    }
     
     @IBOutlet weak var windSpeedImage: UIImageView! {
         didSet {
             windSpeedImage.image = #imageLiteral(resourceName: "ic_wind")
         }
     }
-    @IBOutlet weak var windSpeedLabel: UILabel!
+    @IBOutlet weak var windSpeedLabel: UILabel! {
+        didSet {
+            windSpeedLabel.textColor = UIColor(rgb: 0xFFFFFF)
+        }
+    }
     @IBOutlet weak var windSpeedDirection: UIImageView! {
         didSet {
             windSpeedDirection.image = #imageLiteral(resourceName: "icon_wind_se.pdf")
@@ -111,11 +131,11 @@ class HeaderTableView: UIView, UICollectionViewDataSource, UICollectionViewDeleg
     }
     
     private func setView(with weather: CurrentWeatherForecast) {
-        locationLabel.text = "Kyiv"
+        locationLabel.text = "Київ"
         dateLabel.text = "\(Date().currentDay())"
-        temperatureLabel.text = "\(weather.main?.temp_min?.toInt() ?? 0)° / \(weather.main?.temp_max?.toInt() ?? 0)°"
+        temperatureLabel.text = "\(weather.main?.tempMin?.toInt() ?? 0)° / \(weather.main?.tempMax?.toInt() ?? 0)°"
         humidityLabel.text = "\(weather.main?.humidity ?? 0)%"
-        windSpeedLabel.text = "\(weather.wind?.speed ?? 0.0)m/sec"
+        windSpeedLabel.text = "\(weather.wind?.speed ?? 0.0)м/сек"
 
     }
     

@@ -11,7 +11,6 @@ class Observable<T> {
 
     var value: T {
         didSet {
-            print("new value setted")
             listener?(value)
         }
     }
@@ -19,12 +18,10 @@ class Observable<T> {
     private var listener: ((T) -> Void)?
 
     init(_ value: T) {
-        print("observable inition")
         self.value = value
     }
 
     func bind(_ closure: @escaping (T) -> Void) {
-        print("Connected new listener")
         closure(value)
         listener = closure
     }
